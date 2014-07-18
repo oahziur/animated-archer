@@ -1,9 +1,9 @@
 * Problem Formulation
 ** Variables
-  - n, number of Jobs
-  - m, number of identical Machine
-  - J, an array of each Jobs' weight
-  - S, an array of each Jobs' Schedule
+   - n, number of Jobs
+   - m, number of identical Machine
+   - J, an array of each Jobs' weight
+   - S, an array of each Jobs' Schedule
 ** Constraints
    - m > 1
    - n > m
