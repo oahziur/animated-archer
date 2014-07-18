@@ -1,0 +1,25 @@
+* Problem Formulation
+** Variables
+  - n, number of Jobs
+  - m, number of identical Machine
+  - J, an array of each Jobs' weight
+  - S, an array of each Jobs' Schedule
+** Constraints
+   - m > 1
+   - n > m
+   - \forall s \in S, 1 <= s <= m
+** Cost Function
+   - max(J .* S)
+** Goals
+   - Minimize cost function
+   - Minimize number of iterations for each algorithm
+   - Find the best algorithm for the problem
+* Tabu Search
+
+* Simulated Annealing
+
+* Genetic Algorithm
+
+* Particle Swarm Optimization
+
+* Ant Colony Optimization
