@@ -17,7 +17,9 @@
     - n > m
     - \forall s \in S, 1 <= s <= m
 *** Cost Function
-    - max(J .* S)
+
+    Time takes the longest scheduled machine to finish. See cost.m
+
 *** Goals
     - Minimize cost function
     - Minimize number of iterations for each algorithm
