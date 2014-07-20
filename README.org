@@ -1,25 +1,44 @@
-* Problem Formulation
-** Variables
-   - n, number of Jobs
-   - m, number of identical Machine
-   - J, an array of each Jobs' weight
-   - S, an array of each Jobs' Schedule
-** Constraints
-   - m > 1
-   - n > m
-   - \forall s \in S, 1 <= s <= m
-** Cost Function
-   - max(J .* S)
-** Goals
-   - Minimize cost function
-   - Minimize number of iterations for each algorithm
-   - Find the best algorithm for the problem
-* Tabu Search
+** Problem Description
 
-* Simulated Annealing
+   Job shop scheduling is an optimization problem in which n jobs J1,
+   J2, ..., Jn of varying sizes are given. These jobs need to be
+   scheduled on m identical machines, while trying to minimize the
+   makespan. The makespan is the total length of the schedule (that
+   is, when all the jobs have finished processing).
 
-* Genetic Algorithm
+** Problem Formulation
+*** Variables
+    - n, number of Jobs
+    - m, number of identical Machine
+    - J, an array of each Jobs' weight
+    - S, an array of each Jobs' Schedule
+*** Constraints
+    - m > 1
+    - n > m
+    - \forall s \in S, 1 <= s <= m
+*** Cost Function
+    - max(J .* S)
+*** Goals
+    - Minimize cost function
+    - Minimize number of iterations for each algorithm
+    - Find the best algorithm for the problem
+*** Simple Example
+    - J = (2,3,4,6,2,2)
+    - S = (1,2,2,3,1,1)
+    - Cost = 7
+    - This setup is optimal
+*** Neighbors of each schedule
 
-* Particle Swarm Optimization
+    Each schedule will have (m-1)*n neighbors, where m is the number
+    of machines, and n is the number of jobs. Neighbors will only have
+    one job scheduled on a different machine.
 
-* Ant Colony Optimization
+** Tabu Search
+
+** Simulated Annealing
+
+** Genetic Algorithm
+
+** Particle Swarm Optimization
+
+** Ant Colony Optimization
