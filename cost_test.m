@@ -3,7 +3,7 @@ function [] = cost_test()
   J = [2, 3, 4, 6, 2, 2];
   result = cost(S, J, 3, 6);
   if result == 7
-    disp("cost function test passed");
+    disp("cost function test PASSED!");
   else
-    disp("cost function test failed");
+    disp("cost function test FAILED!");
 end
