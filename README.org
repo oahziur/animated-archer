@@ -38,7 +38,22 @@
 ** Tabu Search
 
 ** Simulated Annealing
-
+*** Finding a suitable start temperature
+    - Assume the max change is the MAX of
+      - total time of all job divide by number of machines.
+      - max time of a single job.
+    - Formula to find the max
+      - Temp_start = -1 * max_change / ln(p_0), where p_0 is 0.85
+    - Start temperature is not calculated within SA, need to be
+      calculated before execute the SA.
+      - see "findStartTemp" in "SA_test.m".
+*** Cooling Schedule
+    - Using geometric cooling schedule.
+    - Final temperature should close to zero but not equal to zero.
+    - alpha = 0.75 ~ 0.9 is commonly used.
+    - iteration
+      - a constant.
+      - number of iteration for each temperature.
 ** Genetic Algorithm
 
 ** Particle Swarm Optimization
