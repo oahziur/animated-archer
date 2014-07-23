@@ -29,15 +29,15 @@
     - S = (1,2,2,3,1,1)
     - Cost = 7
     - This setup is optimal
+** Tabu Search
+
+** Simulated Annealing
 *** Neighbors of each schedule
 
     Each schedule will have (m-1)*n neighbors, where m is the number
     of machines, and n is the number of jobs. Neighbors will only have
     one job scheduled on a different machine.
 
-** Tabu Search
-
-** Simulated Annealing
 *** Finding a suitable start temperature
     - Assume the max change is the MAX of
       - total time of all job divide by number of machines.
