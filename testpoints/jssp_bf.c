@@ -2,16 +2,18 @@
 #include <limits.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
+#include <inttypes.h>
 
-#define TASK 15
+#define TASK 20
 #define MACHINE 4
 
 int s[TASK];
-int d[TASK] = {91,36,65,82,51,6,12,96,26,96,54,4,54,47,6};
+int d[TASK] = {32,96,4,32,97,29,35,97,6,74,77,78,33,4,92,69,64,51,58,91};
 int m[MACHINE];
 int bests[TASK];
 int best = INT_MAX;
-int trial = 0;
+uint64_t trial = 0;
 
 int finds(int tid)
 {
@@ -30,7 +32,7 @@ int finds(int tid)
 			memcpy(bests, s, sizeof(s));
 		}
 		if((trial++ % 100000000) == 0)
-			printf("trial: %d00M, best:%d\n", trial/100000000, best);
+			printf("trial: %" PRIu64 "00M, best:%d\n", trial/100000000, best);
 		return 0;
 	}
 	for (i = 0; i < MACHINE; i++)
