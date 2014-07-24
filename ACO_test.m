@@ -21,8 +21,8 @@ function [] = ACO_16t6m_test()
   n = 16;
   S = ones(1, n);
   J = [58,72,79,43,16,37,7,74,97,44,39,80,65,65,39,96];
-  [costs, bestSol] = ACO(J, m, n, 5*m*n, 80, 0.2, @cost);
-  bestSolCost = cost(bestSol, J, m, n)
+  [costs, bestSol] = ACO(J, m, n, 5*m*n, 160, 0.2, @cost);
+  bestSolCost = cost(bestSol, J, m, n);
   if bestSolCost == 154
     disp('16t6m test PASSED!');
   else
