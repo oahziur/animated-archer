@@ -8,7 +8,6 @@ function [costs, bestSol] = ACO(jobs, m, n, ants, iterations, ...
   costs = [];
   bestSol = ones(1, n);
   bestSolCost = costFunc(bestSol, jobs, m, n);
-  avgLoad = sum(jobs) / m;
 
   phermone = ones(n, m*m); % track phermone value on each path.
 
@@ -17,7 +16,6 @@ function [costs, bestSol] = ACO(jobs, m, n, ants, iterations, ...
     antPaths = []; % stores all antPaths
     for a = 1:ants;
 
-      mLoad = zeros(1, m);
       antPath = []; % current ants path
 
       for l = 1:n % going down n layers in total
@@ -41,8 +39,13 @@ function [costs, bestSol] = ACO(jobs, m, n, ants, iterations, ...
 
         randVal = rand(1);
         weights = phermoneToNextLevel;
+        testPath = antPath; % copy current ant path to calculate distance
         for mi = 1:m
-          weights(mi) = weights(mi) + avgLoad / (mLoad(mi) + 1);
+          testPath(l) = mi;
+          % Construct a matrix to memorize this for better performance
+          distance =  costFunc(testPath, jobs, m, l) - costFunc(antPath, ...
+                                                                jobs, m, l-1);
+          weights(mi) = weights(mi) / (distance+1);
         end
         totalWeight = sum(weights);
         weightAcc = 0;
@@ -58,7 +61,6 @@ function [costs, bestSol] = ACO(jobs, m, n, ants, iterations, ...
           end
         end
         antPath(l) = nextIndex;
-        mLoad(nextIndex) = mLoad(nextIndex) + jobs(l); % update machine load
       end
 
       antPaths(a, :) = antPath;
@@ -84,7 +86,8 @@ function [costs, bestSol] = ACO(jobs, m, n, ants, iterations, ...
     % 1. size(bestAntPaths, 1) * (worstAntCost / bestAntCost);
     % 2. size(bestAntPaths, 1) * (bestAntCost - worstAntCost);
 
-    deltaPhermone = ((bestSolCost / bestAntCost) >= 1);
+    deltaPhermone = 1 / bestAntCost;
+
     for s = 1:size(bestAntPaths, 1)
       bestAntPath = bestAntPaths(s,:);
       for ji = 1:n
@@ -93,7 +96,7 @@ function [costs, bestSol] = ACO(jobs, m, n, ants, iterations, ...
           pcol = bestAntPath(ji);
         else
           lastNode = bestAntPath(ji - 1);
-          pcol = (lastNode - 1) * m + bestAntPaths(ji);
+          pcol = (lastNode - 1) * m + bestAntPath(ji);
         end
         phermone(ji, pcol) = phermone(ji, pcol) + deltaPhermone;
       end
