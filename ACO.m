@@ -2,6 +2,8 @@
 % Problem.
 
 function [costs, bestSol] = ACO(jobs, m, n, ants, iterations, costFunc)
+
+  costEnd = 0;
   costs = [];
   bestSol = ones(1, n);
   bestSolCost = costFunc(bestSol, jobs, m, n);
@@ -9,42 +11,59 @@ function [costs, bestSol] = ACO(jobs, m, n, ants, iterations, costFunc)
   phermone = ones(n, m*m); % track phermone value on each path.
 
   for i = 1:iterations
+
+    antPaths = []; % stores all antPaths
     for a = 1:ants;
 
-      ant_path = [];
+      antPath = []; % current ants path
 
       for l = 1:n % going down n layers in total
 
+        phermoneToNextLevel = [];
+
         if l == 1 % layer 1 to n mapping
-          phermone_to_next_level = [];
           for j = 1:m
-            phermone_to_next_level(j) = phermone(1, j);
+            phermoneToNextLevel(j) = phermone(1, j);
           end
 
         else % rest layers are n to n mapping
-          last_node = ant_path(l-1);
+          lastNode = antPath(l-1);
 
-          phermone_row = l;
-          phermone_col_s = (last_node-1) * m + 1;
-          phermone_col_f = last_node * m;
-          phermone_to_next_level = [];
-          temp_index = 1;
+          phermoneRow = l;
+          phermoneColS = (lastNode - 1) * m + 1;
+          phermoneColF = lastNode * m;
+          tempIndex = 1;
 
-          for j = phermone_col_s:phermone_col_f
-            phermone_to_next_level(temp_index) = phermone(phermone_row, j);
+          for j = phermoneColS:phermoneColF
+            phermoneToNextLevel(tempIndex) = phermone(phermoneRow, j);
+            tempIndex = tempIndex + 1;
           end
-
         end
 
+        randVal = rand(1);
+        totalPhermone = sum(phermoneToNextLevel);
+        phermoneAcc = 0;
+        nextIndex = 0;
+
+        while randVal > (phermoneAcc / totalPhermone)
+          nextIndex = nextIndex + 1;
+          phermoneAcc = phermoneAcc + phermoneToNextLevel(nextIndex);
+        end
+
+        antPath(l) = nextIndex;
+
       end
-      % Update the current best ants
+
+      antPaths(a, :) = antPath;
 
     end
 
-    % Update the current best solution
+    antPaths
+    pause;
 
     % Update phermone
     phermone = phermone .* 0.5;
 
+    % Update the best path of current iterations
   end
 end
