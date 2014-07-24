@@ -6,7 +6,7 @@ end
 function [] = SA_samll_test()
   m = 3;
   n = 6;
-  S = ones(1, n);
+  S = initSolution(m,n);
   J = [2, 3, 4, 6, 2, 2];
   sT = findStartTemp(J, m);
   [costs, bestSol] = SA(S, J, m, n, 2, sT, 0.01, 0.85, @cost, @gen_neighbor);
@@ -21,7 +21,7 @@ end
 function [] = SA_16t6m_test()
   m = 6;
   n = 16;
-  S = ones(1, n);
+  S = initSolution(m,n);
   J = [58,72,79,43,16,37,7,74,97,44,39,80,65,65,39,96];
   sT = findStartTemp(J, m);
   [costs, bestSol] = SA(S, J, m, n, 55, sT, 0.000001, 0.85, @cost, @gen_neighbor);
@@ -43,4 +43,11 @@ function [sT] = findStartTemp(jobs, m)
     maxChange = avgExeTime;
   end
   sT = -1* maxChange / log(0.85);
+end
+
+function [S] = initSolution(m, n)
+  S = [];
+  for i = 1:n
+      S(i) = mod(i, m) + 1;
+  end
 end
