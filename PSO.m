@@ -1,7 +1,7 @@
 function [costs, bestSol] = PSO(jobs, m, n, particals, iterations, costFunc)
   c1 = 1.4944;
   c2 = 1.4944;
-  w = 0.792;
+  w = 0.79;
   gbests = ones(1, n);
   gbest = costFunc(gbests, jobs, m, n);
   lbests = randi(m, particals, n);
@@ -19,10 +19,12 @@ function [costs, bestSol] = PSO(jobs, m, n, particals, iterations, costFunc)
   for i = 1:iterations
       ibests = ones(particals, n);
       ibest = ones(1, particals);
-      r = rand(particals, 1);
-      v = w*v + c1 * bsxfun(@times, r, lbests - x) + ...
-        c2 * bsxfun(@times, r, (bsxfun(@minus, gbests, x)));
+      r1 = rand(particals, 1);
+      r2 = rand(particals, 1);
+      v = w*v + c1 * bsxfun(@times, r1, lbests - x) + ...
+        c2 * bsxfun(@times, r2, (bsxfun(@minus, gbests, x)));
       x = round(x + v);
+      %x = bsxfun(@mod, x, m) + 1;
       x(x < 1) = 1;
       x(x > m) = m;
       for j = 1:particals
@@ -33,6 +35,7 @@ function [costs, bestSol] = PSO(jobs, m, n, particals, iterations, costFunc)
           end
       end
       [ibest, idx] = min(lbest);
+      %ibest
       ibests = lbests(idx, :);
       if ibest < gbest
           gbest = ibest;
