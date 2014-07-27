@@ -1,4 +1,4 @@
-function [costs, bestSol] = PSO(jobs, m, n, particals, iterations, costFunc)
+function [costs, bestSol] = PSO_lbest(jobs, m, n, particals, iterations, costFunc)
   c1 = 1.4944;
   c2 = 1.4944;
   w = 0.9;
@@ -8,7 +8,7 @@ function [costs, bestSol] = PSO(jobs, m, n, particals, iterations, costFunc)
   lbest = ones(1, particals);
   nbests = lbests;
   nbest = lbest;
-  nsize = 2;
+  nsize = 1;
   for i = 1:particals
       lbest(i) = costFunc(lbests(i, :), jobs, m, n);
       %if lbest(i) < gbest
