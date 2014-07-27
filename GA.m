@@ -6,7 +6,7 @@ global solnew sol pop popnew fitness fitold range userdefinedn chromesomesize jo
 range=[1 numberOfMachines]; % Range/Domain
 % Initializing the parameters
 rand('state' ,0'); % Reset the random generator
-popsize=20; % Population size
+popsize=100; % Population size
 MaxGen=100; % Max number of generations
 count=0;    % counter
 nsite=2;    % number of mutation sites
