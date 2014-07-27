@@ -57,6 +57,24 @@
 ** Genetic Algorithm
 
 ** Particle Swarm Optimization
+*** Overview
+
+    This part uses the Ring Topology or lbest Particle Swarm Algorithm to find 
+	optimal solution for job scheduling problem. Each particle is communicating 
+    with four of its adjecent neighour. In each iteration, each partical 
+    calculates its speed based on the best solution in its neighbour and its 
+    personal best. Speed and location is defined in n dimensions.
+    
+*** Initial state
+    - All particals starts with 0 speed at all n directions.
+    - All particals starts at location randomly assigned between 1 ~ m in all 
+      dimensions.
+    - Local best solution is the same as partical's location
+    - Neighbor best solution in each particle is the best solution in four of 
+      its neighours based on neighbor index.
+      
+*** Local search criteria
+    - v_{t+1}^{i} = w\times v_{t}^{i}+c_{1}r_{1}^{i}\left (pbest_{t}^{i}-x_{t}^{i} \right )+c_{2}r_{2}^{i}\left (Nbest_{t}^{i}-x_{t}^{i} \right )
 
 ** Ant Colony Optimization
 *** Overview
