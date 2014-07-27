@@ -59,3 +59,28 @@
 ** Particle Swarm Optimization
 
 ** Ant Colony Optimization
+*** Overview
+
+    This part uses Ant Colony System to find the optimal solution for the job
+    scheduling problem. The process is similar to find a shortest path between
+    two nodes on an weighted tree graph.
+
+*** Initial state
+    - All ants starts at layer 0 of the tree, which means no job has been
+      scheduled.
+    - All routes has initial pheromone of 1.
+    - pheromone will decrease 40% after each round.
+*** Local search criteria
+    - Local search depends on the number of pheromone, and the cost to move the
+      next level.
+    - The cost is calculate by the the extra number of time required for
+      including the next job in certain machine. The cost can be zero.
+    - Using experience vs Explore the new scheduling
+      1. a rand value is generate to compare with r_0
+      2. if the rand value is smaller than r_0, the local search will select the
+         route with max amount of pheromone
+      3. otherwise, it will do a roulette wheel selection based on ( pheromone /
+         (route-cost + 1))
+*** Pheromone deposit
+    - only the best ants in each round can deposit pheromone on its path.
+    - the number of pheromone deposited equals to ( 1 / best-ant-total-cost).
