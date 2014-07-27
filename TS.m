@@ -7,7 +7,7 @@ function [costs, bestSol] = TS(jobs, m, n, listLength, iterations, costFunc, get
     % Firstly, randomly generate an initial solution given m and n
     % Set the best solution to the initial solution
     bestSol = ones(1, n);
-    for i = 1 : m
+    for i = 1 : n
         bestSol(i) = randi([1,m],1);
     end
     bestSolCost = costFunc(bestSol, jobs, m, n);
