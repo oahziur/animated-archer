@@ -2,7 +2,7 @@
 % Written by X S Yang (Cambridge University)
 % Usage: gasimple or gasimple('x*exp(-x)');
 function [schedule,costOutput]=GA(jobs, numberOfMachines, maxGen)
-global solnew sol pop popnew fitness fitold range userdefinedn chromesomesize jobList NumberOfMachines;
+global solnew sol pop popnew fitness fitold range userdefinedn chromesomesize jobList NumberOfMachines limitedRange;
 range=[1 numberOfMachines]; % Range/Domain
 % Initializing the parameters
 rand('state' ,0'); % Reset the random generator
@@ -17,10 +17,10 @@ pm=0.05;    % Mutation probability
 if nargin>1,
     MaxGen=maxGen;
     jobList=jobs;
-    NumberOfMachines=numberOfMachines;
+    NumberOfMachines=numberOfMachines;    
 end
 
-chromesomesize=length(dec2bin(numberOfMachines-1));
+chromesomesize=length(dec2bin(numberOfMachines));
 nsbit=length(jobs)*chromesomesize;   % String length (bits)
 userdefinedn=length(jobs); %user defined n
 % Generating the initial population
@@ -32,10 +32,15 @@ plot(x,felement(x,userdefinedn));
 % Initialize solution <- initial population
 solnew=zeros(popsize, userdefinedn);
 
+limitedRange=max(abs(range));
+
 %TODO:populate row
 for i=1:popsize,
-    solnew(i,:)=bintodec(popnew(i,:))+1;
+    solnew(i,:)=bintodec(popnew(i,:));
 end
+
+bestfun=zeros(MaxGen,1);
+bestsol=zeros(MaxGen,length(jobs));
 % Start the evolution loop
 for i=1:MaxGen,
     % Record as the history
@@ -91,7 +96,7 @@ end % end for init_gen
 % Evolving the new generation
 function evolve(j)
 global solnew popnew fitness fitold pop sol jobList NumberOfMachines;
-solnew(j,:)=bintodec(popnew(j,:))+1;
+solnew(j,:)=bintodec(popnew(j,:));
 %TODO: cost(schedule, Jobs, numberOfMachine)
 fitness(j)= 1 / (1 + cost( solnew(j,:),jobList,NumberOfMachines));
 if fitness(j)>fitold(j),
@@ -104,21 +109,28 @@ end % end for evolve
 
 %TODO: Fix
 function [decs]=bintodec(bins)
-global range chromesomesize userdefinedn;
+global chromesomesize userdefinedn limitedRange;
 decs=zeros(1, userdefinedn);
 index=1;
 for deci=1:userdefinedn,
     nindex=index+chromesomesize;
     bin=bins(index:nindex-1);
     num=bin(1:end); % get the binary
-    dec=0;
-    % floating point/decimal place in a binary string
-    dp=floor(log2(max(abs(range))));
+ 
+%     % floating point/decimal place in a binary string
+%     dp=floor(log2(max(abs(range))));
+%     for i=1:length(bin),
+%         dec=dec+num(i)*2^(dp-i);
+%     end
+%     index=nindex;
+%     decs(deci)=round(dec);
+    generated=0;
     for i=1:length(bin),
-        dec=dec+num(i)*2^(dp-i);
+        generated=generated+num(i)*2^(length(bin)-i);
     end
-    index=nindex;
-    decs(deci)=round(dec);
+    dec=round((generated/((2^chromesomesize)-1))*(limitedRange-1))+1;    
+	index=nindex;
+    decs(deci)=dec;
 end
 end % end for bintodec
 
@@ -146,6 +158,7 @@ end % end for mutation operation
 % x is the input of each value in vector x, assume each vector is same
 % n is the user defined variable, which implies the size of the input
 function [result]=felement(x, n)
+result=zeros(1,size(x,2));
 for i=1:size(x,2),
     absx = abs(x(i));
     absxn(1:n) = absx;
@@ -154,12 +167,6 @@ for i=1:size(x,2),
 end
 end
 
-% function for question 3, assume every value in vector x is different
-function [result]=fvector(x)
-absxn = abs(x);
-iexp = linspace(2, size(x, 2)+1, size(x,2));
-result = sum(absxn .^ iexp);
-end
 
 function [result]=cost(schedule, jobs, numberOfMachines)
 results=zeros(1,numberOfMachines);
