@@ -1,3 +1,4 @@
 *.html
+*.asv
 .DS_Store
 octave-workspace
