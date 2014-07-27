@@ -1,4 +1,5 @@
-function [bestNeighbour, bestNeighbourCost, newTabuList, cantMove] = getBestNeighbor(schedule, jobs, m, n, tabuList, knownBestCost, costFunc)
+function [bestNeighbour, bestNeighbourCost, newTabuList, cantMove] = ...
+  getBestNeighbor(schedule, jobs, m, n, tabuList, knownBestCost, costFunc)
   neighbor = schedule;
   bestNeighbour = schedule;
   newTabuList = tabuList;
@@ -9,7 +10,6 @@ function [bestNeighbour, bestNeighbourCost, newTabuList, cantMove] = getBestNeig
   cantMove=0;
 
   tabuList_transposed = transpose(tabuList);
-
   for i = 1 : n
     job_to_mutate=i;
     for j = 1 : m
@@ -28,7 +28,8 @@ function [bestNeighbour, bestNeighbourCost, newTabuList, cantMove] = getBestNeig
               move = [i;j];
             end
           else %[i;j] not in tabu list
-            if(costFunc(neighbor, jobs, m, n)<costFunc(bestNeighbour, jobs, m, n))
+            if(costFunc(neighbor, jobs, m, n) < costFunc(bestNeighbour, jobs, m, n))
+              neighborBestCost = costFunc(neighbor, jobs, m, n);
               bestNeighbour = neighbor;
               move = [i;j];
             end
@@ -41,7 +42,7 @@ function [bestNeighbour, bestNeighbourCost, newTabuList, cantMove] = getBestNeig
   if (move==[0;0])
     cantMove=1;
   else % update tabuList if a move is available
-    newTabuList = tabuList(:,1);
+    newTabuList = tabuList(:,2:end);
     newTabuList = [newTabuList move];
   end
   bestNeighbourCost = costFunc(bestNeighbour, jobs, m, n);

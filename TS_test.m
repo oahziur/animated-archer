@@ -26,7 +26,7 @@ function [] = TS_16t6m_test()
     disp('16t6m test PASSED!');
   else
     disp('16t6m test FAILED!');
-    bestSolCost
+    disp(bestSolCost);
   end
   plot(costs);
 end
