@@ -74,8 +74,7 @@
       its neighours based on neighbor index.
       
 *** Local search criteria
-    - v_{t+1}^{i} = w\times v_{t}^{i}+c_{1}r_{1}^{i}(pbest_{t}^{i}-x_{t}^{i})
-    - +c_{2}r_{2}^{i}(Nbest_{t}^{i}-x_{t}^{i})
+    - v_{t+1}^{i} = w\times v_{t}^{i}+c_{1}r_{1}^{i}(pbest_{t}^{i}-x_{t}^{i})+c_{2}r_{2}^{i}(Nbest_{t}^{i}-x_{t}^{i})
 
 ** Ant Colony Optimization
 *** Overview
