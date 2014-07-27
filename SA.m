@@ -10,7 +10,8 @@
 % alpha: alpha in geometric cooling schedule.
 
 function [costs, bestSol] = SA(schedule, jobs, m, n, iterations, sT, ...
-                               fT, alpha, costFunc, genNeighborFunc)
+                               minTotalIteration, alpha, costFunc, ...
+                               genNeighborFunc)
   costsEnd = 0;
   costs = [];
   bestSol = schedule;
@@ -18,8 +19,10 @@ function [costs, bestSol] = SA(schedule, jobs, m, n, iterations, sT, ...
   acceptedSol = schedule;
   acceptedSolCost = costFunc(schedule, jobs, m, n);
   T = sT;
-  while T > fT
+  counter = 0;
+  while counter < minTotalIteration
     for i=1:iterations
+      counter++;
       newSol = genNeighborFunc(acceptedSol, m, n);
       newSolCost = costFunc(newSol, jobs, m, n);
       deltaCost = newSolCost - acceptedSolCost;
