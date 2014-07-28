@@ -77,7 +77,7 @@
     This part uses Genetic Algorithm to find the optimal solution for the job
     scheduling problem. The process was inspired by the evolution of organisms
     in natural. It employs random crossover, mutation and evolution to achieve
-    the goal of finding the optimal scheduling for a set of given jobs.
+    the goal of finding the optimal scheduling for a set of given jobs. This process is based on the stock Genetic Algorithm given by the professor.
 
 *** Initial state
     - The population size is set to 100
