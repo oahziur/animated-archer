@@ -28,9 +28,10 @@ function [costs, schedule]=GA(jobs, numberOfMachines, maxGen)
   % Generating the initial population
   popnew=init_gen(popsize,nsbit);
   fitness=zeros(1,popsize); % fitness array
-  % Display the shape of the function
-  % x=range(1):0.1:range(2);
-  % plot(x,felement(x,userdefinedn));
+%   Display the shape of the function
+  x=range(1):0.1:range(2);
+  plot(x,felement(x,userdefinedn));
+  fitold=fitness;
 
   % Initialize solution <- initial population
   solnew=zeros(popsize, userdefinedn);
@@ -46,12 +47,25 @@ function [costs, schedule]=GA(jobs, numberOfMachines, maxGen)
 
   bestfun=zeros(MaxGen,1);
   bestsol=zeros(MaxGen,length(jobs));
+  
+  %Record as the history
+  fitold=fitness;
+  pop=popnew;
+  sol=solnew;
+  
   % Start the evolution loop
   for i=1:MaxGen,
     % Record as the history
-    fitold=fitness;
-    pop=popnew;
-    sol=solnew;
+    for k=1:popsize,
+        if(fitness(k)>=fitold(k))
+            pop(k,:)=popnew(k,:);
+            sol(k,:)=solnew(k,:);
+            fitold(k)=fitness(k);
+        else
+            popnew(k,:)=pop(k,:);
+            solnew(k,:)=sol(k,:);
+        end
+    end
     for j=1:popsize,
       % Crossover pair
       ii=floor(popsize*rand)+1;
@@ -79,14 +93,14 @@ function [costs, schedule]=GA(jobs, numberOfMachines, maxGen)
     costs(i,:)=cost(bestsol(i,:), jobs, numberOfMachines);
   end % end for i
 
-  % % Display results
-  % set(gcf,'color','w');
-  % subplot (2,1,1);
-  % plot(bestsol);
-  % title('Plot of best solution of each generation');
-  % subplot(2,1,2);
-  % plot(bestfun);
-  % title('Fitness');
+  % Display results
+  set(gcf,'color','w');
+  subplot (2,1,1);
+  plot(bestsol);
+  title('Plot of best solution of each generation');
+  subplot(2,1,2);
+  plot(bestfun);
+  title('Fitness');
 
   %output
   schedule=bestsol(size(bestsol, 1),:);
@@ -110,6 +124,9 @@ function evolve(j)
   if fitness(j)>fitold(j),
     pop(j,:)=popnew(j,:);
     sol(j)=solnew(j);
+%   else
+%       popnew(j,:)= pop(j,:);
+%     solnew(j)=sol(j);
   end
 % Convert a binary string into a decimal number
 end % end for evolve
