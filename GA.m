@@ -2,6 +2,9 @@
 % Written by X S Yang (Cambridge University)
 % Usage: gasimple or gasimple('x*exp(-x)');
 
+%This program is modified to satify the Job Scheduling problem
+%For ECE457A, Unitersity of Waterloo, Summer, 2014
+
 %costs, Best Solution
 function [costs, schedule]=GA(jobs, numberOfMachines, maxGen)
   global solnew sol pop popnew fitness fitold range userdefinedn chromesomesize jobList NumberOfMachines limitedRange;
