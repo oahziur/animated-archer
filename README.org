@@ -74,7 +74,25 @@
       its neighours based on neighbor index.
       
 *** Local search criteria
-    - v_{t+1}^{i} = w\times v_{t}^{i}+c_{1}r_{1}^{i}(pbest_{t}^{i}-x_{t}^{i})+c_{2}r_{2}^{i}(Nbest_{t}^{i}-x_{t}^{i})
+    - Speed is calculated based on each particle's personal best solution and 
+      the best solution of its neighbor. c1 = 1.4944, c2 = 1.4944, w = 0.9
+      v_{t+1}^{i} = w\times v_{t}^{i}+c_{1}r_{1}^{i}(pbest_{t}^{i}-x_{t}^{i})+
+      c_{2}r_{2}^{i}(Nbest_{t}^{i}-x_{t}^{i})
+    - The new solution is calculated by adding its previous location and its 
+      new speed.
+      x_{t+1}^{i} = x_{t}^{i}+v_{t+1}^{i}
+    - When the new cost of the new location is smaller than a particle's local 
+      best, it updates its local best and update its neighbour's neibour best 
+      when applicable.
+    - Asynchronous update method is used to reduce run time load requirement,
+      neighbor best is updated when all partical finishes its calculation for 
+      its current round.
+          
+*** Termination Criteria
+    - The algorithm is terminated when set number of particals completes set
+      number of iterations.
+    - The number of particals determines the amount of exploration and the
+      the amount of iterations determines the amount of exploritation.
 
 ** Ant Colony Optimization
 *** Overview
