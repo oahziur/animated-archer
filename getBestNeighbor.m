@@ -1,49 +1,45 @@
-function [bestNeighbour, bestNeighbourCost, newTabuList, cantMove] = ...
-  getBestNeighbor(schedule, jobs, m, n, tabuList, knownBestCost, costFunc)
-  neighbor = schedule;
-  bestNeighbour = schedule;
-  newTabuList = tabuList;
-  job_to_mutate=0;
-  new_machine=0;
-  bestNeighbour_initialized = 0;
-  move = zeros(2,1);
-  cantMove=0;
+function [bestNeighbour, bestNeighbourCost, newTabuList] = getBestNeighbor(schedule, jobs, m, n, tabuList, knownBestCost, costFunc)
+	total_move_number = (m-1)*n;
+	all_valid_moves = zeros(total_move_number,3);
+	neighbor = schedule;
+	newTabuList = tabuList;
+	row = 1;
+  
+	for i = 1 : n
+		for j = 1 : m
+		  neighbor = schedule;
+			if(j ~= schedule(i))
+				neighbor(i)=j;
+				all_valid_moves(row,:) = [i,j,costFunc(neighbor, jobs, m, n)];
+				row = row+1;
+			end
+		end
+	end
+	all_valid_moves = sortrows(all_valid_moves,3);
 
-  tabuList_transposed = transpose(tabuList);
-  for i = 1 : n
-    job_to_mutate=i;
-    for j = 1 : m
-      new_machine=j;
-      neighbor = schedule;
-      if(new_machine ~= schedule(job_to_mutate))
-        if(bestNeighbour_initialized==0)
-          bestNeighbour(i)=j;
-          move = [i;j];
-          bestNeighbour_initialized = 1;
-        else
-          neighbor(i)=j;
-          if (ismember([i,j],tabuList_transposed,'rows')) %[i;j] is in tabu list
-            if (costFunc(neighbor, jobs, m, n)<knownBestCost)
-              bestNeighbour = neighbor;
-              move = [i;j];
-            end
-          else %[i;j] not in tabu list
-            if(costFunc(neighbor, jobs, m, n) < costFunc(bestNeighbour, jobs, m, n))
-              neighborBestCost = costFunc(neighbor, jobs, m, n);
-              bestNeighbour = neighbor;
-              move = [i;j];
-            end
-          end
-        end
-      end
-    end
-  end
-
-  if (move==[0;0])
-    cantMove=1;
-  else % update tabuList if a move is available
-    newTabuList = tabuList(:,2:end);
-    newTabuList = [newTabuList move];
-  end
-  bestNeighbourCost = costFunc(bestNeighbour, jobs, m, n);
+	for i = 1 : total_move_number
+		neighbor = schedule;
+		job = all_valid_moves(i,1);
+		machine = all_valid_moves(i,2);
+		cost = all_valid_moves(i,3);
+		neighbor(job)=machine;
+		
+		% if in tabu list
+		if(ismember([job,machine],tabuList,'rows'))
+			if(cost < knownBestCost)
+				bestNeighbour = neighbor;
+				bestNeighbourCost = cost;
+				break;
+			end
+		% not in tabu list
+		else
+			bestNeighbour = neighbor;
+			bestNeighbourCost = cost;
+			break;
+		end
+	end
+	
+	%updating tabu list
+	newTabuList(1,:)=[];
+    newTabuList(end+1,:)=[job,machine];
 end
