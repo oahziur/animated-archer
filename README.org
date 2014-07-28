@@ -70,7 +70,29 @@
     - iteration
       - a constant.
       - number of iteration for each temperature.
-** Genetic Algorithm
+*** Overview
+
+ This part uses Genetic Algorithm to find the optimal solution for the job scheduling problem. The process was inspired by the evolution of organisms in natural. It employs random crossover, mutation and evolution to achieve the goal of finding the optimal scheduling for a set of given jobs.
+
+*** Initial state
+-The population size is set to 100
+-Chromosome length depends on the range of the possible output
+-Crossover Probability was set to 95%
+-Mutation probability was set to 5%
+-There will be 2 sites of mutation, when the mutation event occurs
+
+*** Crossover
+-The crossover will exchange chromosome information at a specified crossover site, which is generated randomly.
+-After each crossover, evolve will be called, and the fittest of the older population, or its offspring will survive.
+
+*** Evolve
+-The evolve function will maximize the model function, 1/(1+cost), which is the same as to minimize the cost
+-The old and the new population will be compared, and the fitter of the two will get passed to the next generation
+
+*** Mutate
+- A given number mutation sites were generated, and the binary bits at the generated mutation sites will be flipped
+- Evolve function will be called, and the older generation and the newer generation will be compared, the fittest of the two will get passed on to the next generation
+
 
 ** Particle Swarm Optimization
 *** Overview
