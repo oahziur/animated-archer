@@ -1,11 +1,17 @@
 function [] = ALL_test_16t6m()
   n = 10;
-
+  t(1) = cputime;
   GACost = GA_16t6m_test(n);
+  t(2) = cputime;
   PSOCost = PSO_16t6m_test(n);
+  t(3) = cputime;
   TSCost = TS_16t6m_test(n);
+  t(4) = cputime;
   SACost = SA_16t6m_test(n);
+  t(5) = cputime;
   ACOCost = ACO_16t6m_test(n);
+  t(6) = cputime;
+  diff(t)
 
   % SAVE COST TO DISK
 

@@ -9,7 +9,7 @@ function [costs] =  SA_17t5m_test(iterations)
   [costs, bestSol] = SA(S, J, m, n, iterationsAtTemp, sT, iterations, ...
                         alpha, @cost, @gen_neighbor);
   bestSolCost = cost(bestSol, J, 6, 16);
-  if  bestSolCost == 176
+  if  bestSolCost == 175
     disp('17t6m test PASSED!');
   else
     disp('17t6m test FAILED!');
