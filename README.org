@@ -70,6 +70,8 @@
     - iteration
       - a constant.
       - number of iteration for each temperature.
+
+** Genetic Algorithm
 *** Overview
 
  This part uses Genetic Algorithm to find the optimal solution for the job scheduling problem. The process was inspired by the evolution of organisms in natural. It employs random crossover, mutation and evolution to achieve the goal of finding the optimal scheduling for a set of given jobs.
