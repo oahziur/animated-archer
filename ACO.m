@@ -82,11 +82,13 @@ function [costs, bestSol] = ACO(jobs, m, n, ants, iterations, ...
     % Update phermone
     phermone = phermone .* 0.4;
 
-    % Experimented deltaPhermone.
-    % 1. size(bestAntPaths, 1) * (worstAntCost / bestAntCost);
-    % 2. size(bestAntPaths, 1) * (bestAntCost - worstAntCost);
+    allowUpdate = 0;
+    if bestAntCost <= bestSolCost
+       % ONLY THE GLOBAL BEST ALLOW TO UPDATE
+       allowUpdate = 1;
+    end
 
-    deltaPhermone = 1 / bestAntCost;
+    deltaPhermone = allowUpdate / bestAntCost;
 
     for s = 1:size(bestAntPaths, 1)
       bestAntPath = bestAntPaths(s,:);
