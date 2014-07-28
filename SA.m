@@ -22,7 +22,7 @@ function [costs, bestSol] = SA(schedule, jobs, m, n, iterations, sT, ...
   counter = 0;
   while counter < minTotalIteration
     for i=1:iterations
-      counter++;
+      counter = counter + 1;
       newSol = genNeighborFunc(acceptedSol, m, n);
       newSolCost = costFunc(newSol, jobs, m, n);
       deltaCost = newSolCost - acceptedSolCost;
