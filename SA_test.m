@@ -15,8 +15,8 @@ function [costs] = SA_samll_test(iterations)
   fT = sT*(alpha^(iterations/iterationsAtTemp));
   [costs, bestSol] = SA(S, J, m, n, iterationsAtTemp, sT, fT, alpha, @cost, @gen_neighbor);
   if cost(bestSol, J, 3, 6) == 7
-    disp('small test PASSED!');
+    disp('small global best found!');
   else
-    disp('small test FAILED!');
+    disp('small local best found!');
   end
 end

@@ -5,9 +5,9 @@ function [costs] = GA_17t5m_test(iterations)
   [costs, bestSol] = GA(J, m, iterations);
   bestSolCost = cost(bestSol, J, 6, 16);
   if  bestSolCost == 175
-    disp('17t5m test PASSED!');
+    disp('17t5m global best found!');
   else
-    disp('17t5m test FAILED!');
+    disp('17t5m local best found!');
     disp(bestSolCost);
   end
 end

@@ -6,9 +6,9 @@ function [costs] = ACO_17t5m_test(iterations)
   [costs, bestSol] = ACO(J, m, n, ants, iterations, 0.2, @cost);
   bestSolCost = cost(bestSol, J, 6, 16);
   if  bestSolCost == 175
-    disp('17t5m test PASSED!');
+    disp('17t5m global best found!');
   else
-    disp('17t5m test FAILED!');
+    disp('17t5m local best found!');
     disp(bestSolCost);
   end
 end

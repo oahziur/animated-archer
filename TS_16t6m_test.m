@@ -5,9 +5,9 @@ function [costs] = TS_16t6m_test(iterations)
   [costs, bestSol] = TS(J, m, n, 15, iterations, @cost, @getBestNeighbor);
   bestSolCost = cost(bestSol, J, m, n);
   if bestSolCost == 154
-    disp('16t6m test PASSED!');
+    disp('16t6m global best found!');
   else
-    disp('16t6m test FAILED!');
+    disp('16t6m local best found!');
     disp(bestSolCost);
   end
 end

@@ -10,9 +10,9 @@ function [costs] =  SA_17t5m_test(iterations)
                         alpha, @cost, @gen_neighbor);
   bestSolCost = cost(bestSol, J, 6, 16);
   if  bestSolCost == 175
-    disp('17t6m test PASSED!');
+    disp('17t5m global best found!');
   else
-    disp('17t6m test FAILED!');
+    disp('17t5m local best found!');
     disp(bestSolCost);
   end
 end

@@ -10,8 +10,8 @@ function [costs] = TS_small_test(iterations)
   J = [2, 3, 4, 6, 2, 2];
   [costs, bestSol] = TS(J, m, n, 10, iterations, @cost, @getBestNeighbor);
   if cost(bestSol, J, 3, 6) == 7
-    disp('small test PASSED!');
+    disp('small global best found!');
   else
-    disp('small test FAILED!');
+    disp('small local best found!');
   end
 end

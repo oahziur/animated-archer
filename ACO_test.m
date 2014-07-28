@@ -11,8 +11,8 @@ function [costs] = ACO_small_test(iterations)
   ants = 5;
   [costs, bestSol] = ACO(J, m, n, ants, iterations, 0.2, @cost);
   if cost(bestSol, J, 3, 6) == 7
-    disp('small test PASSED!');
+    disp('small global best found!');
   else
-    disp('small test FAILED!');
+    disp('small local best found!');
   end
 end
