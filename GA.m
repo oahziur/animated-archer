@@ -29,8 +29,8 @@ function [costs, schedule]=GA(jobs, numberOfMachines, maxGen)
   popnew=init_gen(popsize,nsbit);
   fitness=zeros(1,popsize); % fitness array
 %   Display the shape of the function
-  x=range(1):0.1:range(2);
-  plot(x,felement(x,userdefinedn));
+  %x=range(1):0.1:range(2);
+  %plot(x,felement(x,userdefinedn));
   fitold=fitness;
 
   % Initialize solution <- initial population
@@ -94,13 +94,13 @@ function [costs, schedule]=GA(jobs, numberOfMachines, maxGen)
   end % end for i
 
   % Display results
-  set(gcf,'color','w');
-  subplot (2,1,1);
-  plot(bestsol);
-  title('Plot of best solution of each generation');
-  subplot(2,1,2);
-  plot(bestfun);
-  title('Fitness');
+  %set(gcf,'color','w');
+  %subplot (2,1,1);
+  %plot(bestsol);
+  %title('Plot of best solution of each generation');
+  %subplot(2,1,2);
+  %plot(bestfun);
+  %title('Fitness');
 
   %output
   schedule=bestsol(size(bestsol, 1),:);

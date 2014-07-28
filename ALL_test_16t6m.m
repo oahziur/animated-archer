@@ -1,5 +1,5 @@
 function [] = ALL_test_16t6m()
-  n = 10;
+  n = 1000;
   t(1) = cputime;
   GACost = GA_16t6m_test(n);
   t(2) = cputime;
