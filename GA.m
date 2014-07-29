@@ -1,5 +1,6 @@
 % Genetic Algorithm (Simple Demo) Matlab/Octave Program
 % Written by X S Yang (Cambridge University)
+% Modified by Gary Li (University of Waterloo) 2014
 % Usage: gasimple or gasimple('x*exp(-x)');
 
 %This program is modified to satify the Job Scheduling problem
@@ -50,12 +51,12 @@ function [costs, schedule]=GA(jobs, numberOfMachines, maxGen)
 
   bestfun=zeros(MaxGen,1);
   bestsol=zeros(MaxGen,length(jobs));
-  
+
   %Record as the history
   fitold=fitness;
   pop=popnew;
   sol=solnew;
-  
+
   % Start the evolution loop
   for i=1:MaxGen,
     % Record as the history
