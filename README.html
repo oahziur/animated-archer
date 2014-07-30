@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>README</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="title" content="README"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-07-29T20:00-0400"/>
+<meta name="author" content="Rui Zhao"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+        border: 1pt solid #AEBDCC;
+        background-color: #F3F5F7;
+        padding: 5pt;
+        font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">README</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Running</a></li>
+<li><a href="#sec-2">2 Problem Description</a></li>
+<li><a href="#sec-3">3 Problem Formulation</a>
+<ul>
+<li><a href="#sec-3-1">3.1 Variables</a></li>
+<li><a href="#sec-3-2">3.2 Constraints</a></li>
+<li><a href="#sec-3-3">3.3 Cost Function</a></li>
+<li><a href="#sec-3-4">3.4 Goals</a></li>
+<li><a href="#sec-3-5">3.5 Simple Example</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4 Tabu Search</a>
+<ul>
+<li><a href="#sec-4-1">4.1 Neighbors of each schedule</a></li>
+<li><a href="#sec-4-2">4.2 Finding the best neighbor</a></li>
+<li><a href="#sec-4-3">4.3 Tabulist</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 Simulated Annealing</a>
+<ul>
+<li><a href="#sec-5-1">5.1 Neighbors of each schedule</a></li>
+<li><a href="#sec-5-2">5.2 Finding a suitable start temperature</a></li>
+<li><a href="#sec-5-3">5.3 Cooling Schedule</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6 Genetic Algorithm</a>
+<ul>
+<li><a href="#sec-6-1">6.1 Overview</a></li>
+<li><a href="#sec-6-2">6.2 Initial state</a></li>
+<li><a href="#sec-6-3">6.3 Crossover</a></li>
+<li><a href="#sec-6-4">6.4 Evolve</a></li>
+<li><a href="#sec-6-5">6.5 Mutate</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7 Particle Swarm Optimization</a>
+<ul>
+<li><a href="#sec-7-1">7.1 Overview</a></li>
+<li><a href="#sec-7-2">7.2 Initial state</a></li>
+<li><a href="#sec-7-3">7.3 Local search criteria</a></li>
+<li><a href="#sec-7-4">7.4 Termination Criteria</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">8 Ant Colony Optimization</a>
+<ul>
+<li><a href="#sec-8-1">8.1 Overview</a></li>
+<li><a href="#sec-8-2">8.2 Initial state</a></li>
+<li><a href="#sec-8-3">8.3 Local search criteria</a></li>
+<li><a href="#sec-8-4">8.4 Pheromone deposit</a></li>
+</ul>
+</li>
+<li><a href="#sec-9">9 CPU Time Usage Data</a>
+<ul>
+<li><a href="#sec-9-1">9.1 Total time for 1000 iterations</a></li>
+<li><a href="#sec-9-2">9.2 Time of Convergence</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-3">
+<h3 id="sec-1"><span class="section-number-3">1</span> Running</h3>
+<div class="outline-text-3" id="text-1">
+
+<ul>
+<li>All tests
+
+
+
+<pre class="src src-octave">ALL_test_16t6m();
+ALL_test_17t5m();
+</pre>
+
+</li>
+<li>TS
+<ul>
+<li>source code file: TS.m
+</li>
+<li>All test files match TS<sub>*</sub>
+</li>
+<li>example
+
+
+
+<pre class="src src-octave">iterations = 50;
+m = 3;
+n = 6;
+<span style="color: #268bd2;">J</span> = [2, 3, 4, 6, 2, 2];
+[costs, bestSol] = TS(<span style="color: #268bd2;">J</span>, m, n, 10, iterations, @cost, @getBestNeighbor);
+</pre>
+
+</li>
+</ul>
+
+</li>
+<li>SA
+<ul>
+<li>source code file: SA.m
+</li>
+<li>All test files match SA<sub>*</sub>
+</li>
+<li>example
+
+
+
+<pre class="src src-octave">iterations = 50;
+m = 3;
+n = 6;
+S = initSolution(m,n);
+<span style="color: #268bd2;">J</span> = [2, 3, 4, 6, 2, 2];
+sT = findStartTemp(<span style="color: #268bd2;">J</span>, m);
+alpha = 0.85;
+iterationsAtTemp = 2;
+fT = sT*(alpha^(iterations/iterationsAtTemp));
+[costs, bestSol] = SA(S, <span style="color: #268bd2;">J</span>, m, n, iterationsAtTemp, sT, fT, alpha, @cost, @gen_neighbor);
+</pre>
+
+</li>
+</ul>
+
+</li>
+<li>GA
+<ul>
+<li>source code file: GA.m
+</li>
+<li>All test files match GA<sub>*</sub>
+</li>
+<li>example
+
+
+
+<pre class="src src-octave">iterations = 50;
+m = 3;
+n = 6;
+<span style="color: #268bd2;">J</span> = [2, 3, 4, 6, 2, 2];
+[costs, bestSol] = GA(<span style="color: #268bd2;">J</span>, m, iterations);
+</pre>
+
+</li>
+</ul>
+
+</li>
+<li>PSO
+<ul>
+<li>source code file: PSO.m PSO<sub>lbest</sub>.m (better performance)
+</li>
+<li>All test files match PSO<sub>*</sub>
+</li>
+<li>example
+
+
+
+<pre class="src src-octave">iterations = 50;
+m = 3;
+n = 6;
+<span style="color: #268bd2;">J</span> = [2, 3, 4, 6, 2, 2];
+[costs, bestSol] = PSO_lbest(<span style="color: #268bd2;">J</span>, m, n, 1500, iterations, @cost);
+</pre>
+
+</li>
+</ul>
+
+</li>
+<li>ACO
+<ul>
+<li>source code file: ACO.m
+</li>
+<li>All test files match ACO<sub>*</sub>
+</li>
+<li>example
+
+
+
+<pre class="src src-octave">iterations = 50;
+m = 3;
+n = 6;
+<span style="color: #268bd2;">J</span> = [2, 3, 4, 6, 2, 2];
+ants = 5;
+[costs, bestSol] = ACO(<span style="color: #268bd2;">J</span>, m, n, ants, iterations, 0.2, @cost);
+</pre>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h3 id="sec-2"><span class="section-number-3">2</span> Problem Description</h3>
+<div class="outline-text-3" id="text-2">
+
+
+<p>
+   Job shop scheduling is an optimization problem in which n jobs J1,
+   J2, &hellip;, Jn of varying sizes are given. These jobs need to be
+   scheduled on m identical machines, while trying to minimize the
+   makespan. The makespan is the total length of the schedule (that
+   is, when all the jobs have finished processing).
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h3 id="sec-3"><span class="section-number-3">3</span> Problem Formulation</h3>
+<div class="outline-text-3" id="text-3">
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-4">
+<h4 id="sec-3-1"><span class="section-number-4">3.1</span> Variables</h4>
+<div class="outline-text-4" id="text-3-1">
+
+<ul>
+<li>n, number of Jobs
+</li>
+<li>m, number of identical Machine
+</li>
+<li>J, an array of each Jobs' weight
+</li>
+<li>S, an array of each Jobs' Schedule
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-4">
+<h4 id="sec-3-2"><span class="section-number-4">3.2</span> Constraints</h4>
+<div class="outline-text-4" id="text-3-2">
+
+<ul>
+<li>m &gt; 1
+</li>
+<li>n &gt; m
+</li>
+<li>&forall; s &isin; S, 1 &lt;= s &lt;= m
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-4">
+<h4 id="sec-3-3"><span class="section-number-4">3.3</span> Cost Function</h4>
+<div class="outline-text-4" id="text-3-3">
+
+
+<p>
+    Time takes the longest scheduled machine to finish. See cost.m
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-4" class="outline-4">
+<h4 id="sec-3-4"><span class="section-number-4">3.4</span> Goals</h4>
+<div class="outline-text-4" id="text-3-4">
+
+<ul>
+<li>Minimize cost function
+</li>
+<li>Minimize number of iterations for each algorithm
+</li>
+<li>Find the best algorithm for the problem
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-5" class="outline-4">
+<h4 id="sec-3-5"><span class="section-number-4">3.5</span> Simple Example</h4>
+<div class="outline-text-4" id="text-3-5">
+
+<ul>
+<li>J = (2,3,4,6,2,2)
+</li>
+<li>S = (1,2,2,3,1,1)
+</li>
+<li>Cost = 7
+</li>
+<li>This setup is optimal
+</li>
+</ul>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-3">
+<h3 id="sec-4"><span class="section-number-3">4</span> Tabu Search</h3>
+<div class="outline-text-3" id="text-4">
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-4">
+<h4 id="sec-4-1"><span class="section-number-4">4.1</span> Neighbors of each schedule</h4>
+<div class="outline-text-4" id="text-4-1">
+
+
+<p>
+    Each schedule will have (m-1)*n neighbors, where m is the number
+    of machines, and n is the number of jobs. Neighbors will only have
+    one job scheduled on a different machine.
+</p></div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-4">
+<h4 id="sec-4-2"><span class="section-number-4">4.2</span> Finding the best neighbor</h4>
+<div class="outline-text-4" id="text-4-2">
+
+
+<p>
+    In order the find the neighbor with the lowest cost, the algorithm
+    will loop through every  valid neighbor and evaluate its cost. The
+    neighbor with the lowest cost will be selected as the best neighbor.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-3" class="outline-4">
+<h4 id="sec-4-3"><span class="section-number-4">4.3</span> Tabulist</h4>
+<div class="outline-text-4" id="text-4-3">
+
+<ul>
+<li>The list length of the tabulist is user-defined.
+</li>
+<li>The tabulist acts like a queque (first in first out)
+</li>
+<li>The oldest move will be deleted when a new move is appended.
+</li>
+<li>A new move is appended every time after finding a best neighbor.
+</li>
+</ul>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-3">
+<h3 id="sec-5"><span class="section-number-3">5</span> Simulated Annealing</h3>
+<div class="outline-text-3" id="text-5">
+
+
+</div>
+
+<div id="outline-container-5-1" class="outline-4">
+<h4 id="sec-5-1"><span class="section-number-4">5.1</span> Neighbors of each schedule</h4>
+<div class="outline-text-4" id="text-5-1">
+
+
+<p>
+    Each schedule will have (m-1)*n neighbors, where m is the number
+    of machines, and n is the number of jobs. Neighbors will only have
+    one job scheduled on a different machine.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5-2" class="outline-4">
+<h4 id="sec-5-2"><span class="section-number-4">5.2</span> Finding a suitable start temperature</h4>
+<div class="outline-text-4" id="text-5-2">
+
+<ul>
+<li>Assume the max change is the MAX of
+<ul>
+<li>total time of all job divide by number of machines.
+</li>
+<li>max time of a single job.
+</li>
+</ul>
+
+</li>
+<li>Formula to find the max
+<ul>
+<li>Temp<sub>start</sub> = -1 * max<sub>change</sub> / ln(p<sub>0</sub>), where p<sub>0</sub> is 0.85
+</li>
+</ul>
+
+</li>
+<li>Start temperature is not calculated within SA, need to be
+      calculated before execute the SA.
+<ul>
+<li>see "findStartTemp" in "SA<sub>test</sub>.m".
+</li>
+</ul>
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-5-3" class="outline-4">
+<h4 id="sec-5-3"><span class="section-number-4">5.3</span> Cooling Schedule</h4>
+<div class="outline-text-4" id="text-5-3">
+
+<ul>
+<li>Using geometric cooling schedule.
+</li>
+<li>Final temperature should close to zero but not equal to zero.
+</li>
+<li>alpha = 0.75 ~ 0.9 is commonly used.
+</li>
+<li>iteration
+<ul>
+<li>a constant.
+</li>
+<li>number of iteration for each temperature.
+</li>
+</ul>
+
+</li>
+</ul>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-3">
+<h3 id="sec-6"><span class="section-number-3">6</span> Genetic Algorithm</h3>
+<div class="outline-text-3" id="text-6">
+
+
+</div>
+
+<div id="outline-container-6-1" class="outline-4">
+<h4 id="sec-6-1"><span class="section-number-4">6.1</span> Overview</h4>
+<div class="outline-text-4" id="text-6-1">
+
+
+<p>
+    This part uses Genetic Algorithm to find the optimal solution for the job
+    scheduling problem. The process was inspired by the evolution of organisms
+    in natural. It employs random crossover, mutation and evolution to achieve
+    the goal of finding the optimal scheduling for a set of given jobs. This
+    process is based on the stock Genetic Algorithm given by the professor.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-6-2" class="outline-4">
+<h4 id="sec-6-2"><span class="section-number-4">6.2</span> Initial state</h4>
+<div class="outline-text-4" id="text-6-2">
+
+<ul>
+<li>The population size is set to 100
+</li>
+<li>Chromosome length depends on the range of the possible output
+</li>
+<li>Crossover Probability was set to 95%
+</li>
+<li>Mutation probability was set to 5%
+</li>
+<li>There will be 2 sites of mutation, when the mutation event occurs
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-6-3" class="outline-4">
+<h4 id="sec-6-3"><span class="section-number-4">6.3</span> Crossover</h4>
+<div class="outline-text-4" id="text-6-3">
+
+<ul>
+<li>The crossover will exchange chromosome information at a specified
+      crossover site, which is generated randomly.
+</li>
+<li>After each crossover, evolve will be called, and the fittest of the older
+      population, or its offspring will survive.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-6-4" class="outline-4">
+<h4 id="sec-6-4"><span class="section-number-4">6.4</span> Evolve</h4>
+<div class="outline-text-4" id="text-6-4">
+
+<ul>
+<li>The evolve function will maximize the model function, 1/(1+cost), which is
+      the same as to minimize the cost
+</li>
+<li>The old and the new population will be compared, and the fitter of the two
+      will get passed to the next generation
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-6-5" class="outline-4">
+<h4 id="sec-6-5"><span class="section-number-4">6.5</span> Mutate</h4>
+<div class="outline-text-4" id="text-6-5">
+
+<ul>
+<li>A given number mutation sites were generated, and the binary bits at the
+      generated mutation sites will be flipped
+</li>
+<li>Evolve function will be called, and the older generation and the newer
+      generation will be compared, the fittest of the two will get passed on to
+      the next generation
+</li>
+</ul>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-3">
+<h3 id="sec-7"><span class="section-number-3">7</span> Particle Swarm Optimization</h3>
+<div class="outline-text-3" id="text-7">
+
+
+</div>
+
+<div id="outline-container-7-1" class="outline-4">
+<h4 id="sec-7-1"><span class="section-number-4">7.1</span> Overview</h4>
+<div class="outline-text-4" id="text-7-1">
+
+
+<p>
+    This part uses the Ring Topology or lbest Particle Swarm Algorithm to find
+    optimal solution for job scheduling problem. Each particle is communicating
+    with four of its adjecent neighour. In each iteration, each particle
+    calculates its speed based on the best solution in its neighbour and its
+    personal best. Speed and location is defined in n dimensions.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-7-2" class="outline-4">
+<h4 id="sec-7-2"><span class="section-number-4">7.2</span> Initial state</h4>
+<div class="outline-text-4" id="text-7-2">
+
+<ul>
+<li>All particals starts with 0 speed at all n directions.
+</li>
+<li>All particals starts at location randomly assigned between 1 ~ m in all
+      dimensions.
+</li>
+<li>Local best solution is the same as partical's location
+</li>
+<li>Neighbor best solution in each particle is the best solution in four of
+      its neighours based on neighbor index.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-7-3" class="outline-4">
+<h4 id="sec-7-3"><span class="section-number-4">7.3</span> Local search criteria</h4>
+<div class="outline-text-4" id="text-7-3">
+
+<ul>
+<li>Speed is calculated based on each particle's personal best solution and
+      the best solution of its neighbor. c1 = 1.4944, c2 = 1.4944, w = 0.9,
+      v<sub>t+1</sub><sup>i</sup> = w&times; v<sub>t</sub><sup>i</sup>+c<sub>1</sub>r<sub>1</sub><sup>i</sup>(pbest<sub>t</sub><sup>i</sup>-x<sub>t</sub><sup>i</sup>)+
+      c<sub>2</sub>r<sub>2</sub><sup>i</sup>(Nbest<sub>t</sub><sup>i</sup>-x<sub>t</sub><sup>i</sup>)
+</li>
+<li>The new solution is calculated by adding its previous location and its
+      new speed,
+      x<sub>t+1</sub><sup>i</sup> = x<sub>t</sub><sup>i</sup>+v<sub>t+1</sub><sup>i</sup>
+</li>
+<li>When the new cost of the new location is smaller than a particle's local
+      best, it updates its local best and update its neighbour's neibour best
+      when applicable.
+</li>
+<li>Asynchronous update method is used to reduce run time load requirement,
+      neighbor best is updated when all partical finishes its calculation for
+      its current round.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-7-4" class="outline-4">
+<h4 id="sec-7-4"><span class="section-number-4">7.4</span> Termination Criteria</h4>
+<div class="outline-text-4" id="text-7-4">
+
+<ul>
+<li>The algorithm is terminated when set number of particals completes set
+      number of iterations.
+</li>
+<li>The number of particals determines the amount of exploration and the
+      amount of iterations determines the amount of exploitation.
+</li>
+</ul>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-3">
+<h3 id="sec-8"><span class="section-number-3">8</span> Ant Colony Optimization</h3>
+<div class="outline-text-3" id="text-8">
+
+
+</div>
+
+<div id="outline-container-8-1" class="outline-4">
+<h4 id="sec-8-1"><span class="section-number-4">8.1</span> Overview</h4>
+<div class="outline-text-4" id="text-8-1">
+
+
+<p>
+    This part uses Ant Colony System to find the optimal solution for the job
+    scheduling problem. The process is similar to find a shortest path between
+    two nodes on an weighted tree graph.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-8-2" class="outline-4">
+<h4 id="sec-8-2"><span class="section-number-4">8.2</span> Initial state</h4>
+<div class="outline-text-4" id="text-8-2">
+
+<ul>
+<li>All ants starts at layer 0 of the tree, which means no job has been
+      scheduled.
+</li>
+<li>All routes has initial pheromone of 1.
+</li>
+<li>pheromone will decrease 40% after each round.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-8-3" class="outline-4">
+<h4 id="sec-8-3"><span class="section-number-4">8.3</span> Local search criteria</h4>
+<div class="outline-text-4" id="text-8-3">
+
+<ul>
+<li>Local search depends on the number of pheromone, and the cost to move the
+      next level.
+</li>
+<li>The cost is calculate by the the extra number of time required for
+      including the next job in certain machine. The cost can be zero.
+</li>
+<li>Using experience vs Explore the new scheduling
+<ol>
+<li>a rand value is generate to compare with r<sub>0</sub>
+</li>
+<li>if the rand value is smaller than r<sub>0</sub>, the local search will select the
+         route with max amount of pheromone
+</li>
+<li>otherwise, it will do a roulette wheel selection based on ( pheromone /
+         (route-cost + 1))
+</li>
+</ol>
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-8-4" class="outline-4">
+<h4 id="sec-8-4"><span class="section-number-4">8.4</span> Pheromone deposit</h4>
+<div class="outline-text-4" id="text-8-4">
+
+<ul>
+<li>only the best ants in each round can deposit pheromone on its path.
+</li>
+<li>the number of pheromone deposited equals to ( 1 / best-ant-total-cost).
+</li>
+</ul>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-3">
+<h3 id="sec-9"><span class="section-number-3">9</span> CPU Time Usage Data</h3>
+<div class="outline-text-3" id="text-9">
+
+
+</div>
+
+<div id="outline-container-9-1" class="outline-4">
+<h4 id="sec-9-1"><span class="section-number-4">9.1</span> Total time for 1000 iterations</h4>
+<div class="outline-text-4" id="text-9-1">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">data set</th><th scope="col" class="right">GA</th><th scope="col" class="right">PSO</th><th scope="col" class="right">TS</th><th scope="col" class="right">SA</th><th scope="col" class="right">ACO</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">16t6m</td><td class="right">23.15</td><td class="right">6.490</td><td class="right">6.677</td><td class="right">0.062</td><td class="right">49.23</td></tr>
+<tr><td class="left">17t5m</td><td class="right">22.62</td><td class="right">6.209</td><td class="right">5.600</td><td class="right">0.047</td><td class="right">44.15</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div id="outline-container-9-2" class="outline-4">
+<h4 id="sec-9-2"><span class="section-number-4">9.2</span> Time of Convergence</h4>
+<div class="outline-text-4" id="text-9-2">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">data set</th><th scope="col" class="right">GA</th><th scope="col" class="right">PSO</th><th scope="col" class="right">TS</th><th scope="col" class="right">SA</th><th scope="col" class="right">ACO</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">16t6m</td><td class="right">16.97</td><td class="right">2.726</td><td class="right">0.133</td><td class="right">0.012</td><td class="right">0.985</td></tr>
+<tr><td class="left">17t5m</td><td class="right">9.048</td><td class="right">5.588</td><td class="right">0.168</td><td class="right">0.011</td><td class="right">0.883</td></tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2014-07-29T20:00-0400</p>
+<p class="author">Author: Rui Zhao</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

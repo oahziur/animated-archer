@@ -1,3 +1,70 @@
+** Running
+   - All tests
+     #+BEGIN_SRC octave
+       ALL_test_16t6m();
+       ALL_test_17t5m();
+     #+END_SRC
+   - TS
+     - source code file: TS.m
+     - All test files match TS_*
+     - example
+       #+BEGIN_SRC octave
+         iterations = 50;
+         m = 3;
+         n = 6;
+         J = [2, 3, 4, 6, 2, 2];
+         [costs, bestSol] = TS(J, m, n, 10, iterations, @cost, @getBestNeighbor);
+       #+END_SRC
+   - SA
+     - source code file: SA.m
+     - All test files match SA_*
+     - example
+       #+BEGIN_SRC octave
+         iterations = 50;
+         m = 3;
+         n = 6;
+         S = initSolution(m,n);
+         J = [2, 3, 4, 6, 2, 2];
+         sT = findStartTemp(J, m);
+         alpha = 0.85;
+         iterationsAtTemp = 2;
+         fT = sT*(alpha^(iterations/iterationsAtTemp));
+         [costs, bestSol] = SA(S, J, m, n, iterationsAtTemp, sT, fT, alpha, @cost, @gen_neighbor);
+       #+END_SRC
+   - GA
+     - source code file: GA.m
+     - All test files match GA_*
+     - example
+       #+BEGIN_SRC octave
+         iterations = 50;
+         m = 3;
+         n = 6;
+         J = [2, 3, 4, 6, 2, 2];
+         [costs, bestSol] = GA(J, m, iterations);
+       #+END_SRC
+   - PSO
+     - source code file: PSO.m PSO_lbest.m (better performance)
+     - All test files match PSO_*
+     - example
+       #+BEGIN_SRC octave
+         iterations = 50;
+         m = 3;
+         n = 6;
+         J = [2, 3, 4, 6, 2, 2];
+         [costs, bestSol] = PSO_lbest(J, m, n, 1500, iterations, @cost);
+       #+END_SRC
+   - ACO
+     - source code file: ACO.m
+     - All test files match ACO_*
+     - example
+       #+BEGIN_SRC octave
+         iterations = 50;
+         m = 3;
+         n = 6;
+         J = [2, 3, 4, 6, 2, 2];
+         ants = 5;
+         [costs, bestSol] = ACO(J, m, n, ants, iterations, 0.2, @cost);
+       #+END_SRC
 ** Problem Description
 
    Job shop scheduling is an optimization problem in which n jobs J1,
@@ -77,7 +144,8 @@
     This part uses Genetic Algorithm to find the optimal solution for the job
     scheduling problem. The process was inspired by the evolution of organisms
     in natural. It employs random crossover, mutation and evolution to achieve
-    the goal of finding the optimal scheduling for a set of given jobs. This process is based on the stock Genetic Algorithm given by the professor.
+    the goal of finding the optimal scheduling for a set of given jobs. This
+    process is based on the stock Genetic Algorithm given by the professor.
 
 *** Initial state
     - The population size is set to 100
@@ -162,7 +230,7 @@
 *** Pheromone deposit
     - only the best ants in each round can deposit pheromone on its path.
     - the number of pheromone deposited equals to ( 1 / best-ant-total-cost).
-** Run time
+** CPU Time Usage Data
 *** Total time for 1000 iterations
 |----------+-------+-------+-------+-------+-------|
 | data set |    GA |   PSO |    TS |    SA |   ACO |
@@ -170,7 +238,7 @@
 | 16t6m    | 23.15 | 6.490 | 6.677 | 0.062 | 49.23 |
 | 17t5m    | 22.62 | 6.209 | 5.600 | 0.047 | 44.15 |
 |----------+-------+-------+-------+-------+-------|
-*** Time of finding best solution in 1000 iterations
+*** Time of Convergence
 |----------+-------+-------+-------+-------+-------|
 | data set |    GA |   PSO |    TS |    SA |   ACO |
 |----------+-------+-------+-------+-------+-------|
